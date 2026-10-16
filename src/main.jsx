@@ -88,7 +88,12 @@ function print(value, n) {
   }
 }
 
-let oldNode = h("ul", { class: "name" }, h("li", {}, "First"), h("li", {}, "Second"));
+let oldNode = (
+  <ul class="name">
+    <li>First</li>
+    <li>Second</li>
+  </ul>
+);
 
 const root = document.getElementById("root");
 let tree = createTree(oldNode);
@@ -96,7 +101,11 @@ root.appendChild(tree.dom);
 
 const reload = document.getElementById("reload");
 
-const newNode = h("ul", {}, h("li", {}, "Updated"));
+const newNode = (
+  <ul>
+    <li>Updated</li>
+  </ul>
+);
 
 reload.addEventListener("click", () => {
   tree = updateElement(root, newNode, oldNode, tree);
