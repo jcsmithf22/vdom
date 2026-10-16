@@ -1,8 +1,29 @@
-function h(type, props, ...children) {
+type VNode =
+  | {
+      type: string;
+      props: Props;
+      children: VNode[];
+    }
+  | string;
+
+type TNode = {
+  dom: HTMLElement | Text;
+  children: TNode[];
+};
+
+type Props = Record<string, string>
+
+function h(type: string, props: Props, ...children: VNode[]) {
   return { type, props: props || {}, children };
 }
 
-function createTree(node) {
+declare namespace h.JSX {
+  interface IntrinsicElements {
+    [elemName: string]: any;
+  }
+}
+
+function createTree(node: VNode): TNode {
   if (typeof node === "string") {
     return {
       dom: document.createTextNode(node),
@@ -18,13 +39,13 @@ function createTree(node) {
   return { dom, children };
 }
 
-function setProp(target, name, value) {
-	target.setAttribute(name, value)
+function setProp(target: HTMLElement, name: string, value: string) {
+  target.setAttribute(name, value);
 }
 
-function setProps(target, props) {
+function setProps(target: HTMLElement, props: Props) {
   Object.keys(props).forEach((name) => {
-		setProp(target, name, props[name])
+    setProp(target, name, props[name]);
   });
 }
 
