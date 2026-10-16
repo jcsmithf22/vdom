@@ -1,0 +1,12 @@
+{
+  "name": "vdom",
+  "module": "src/main.tsx",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
